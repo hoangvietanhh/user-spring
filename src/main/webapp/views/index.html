@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<body>
+<h3>Customers</h3>
+
+<div class="container">
+    <div class="notify">
+        <div th:if="${success}">
+            <span th:text="${success}"></span>
+        </div>
+    </div>
+    <div class="row">
+        <p>
+            <a class="btn btn-primary" th:href="@{/customers/create}">
+                Add new customer
+            </a>
+        </p>
+    </div>
+
+    <div class="row">
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>View</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row,rowStat : ${customers}">
+                <td th:text="${row.getName()}"></td>
+                <td th:text="${row.getEmail()}"></td>
+                <td th:text="${row.getAddress()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/customers/{id}/edit(id=${row.getId()})}">edit</a></td>
+                <td><a class="btn btn-primary" th:href="@{/customers/{id}/delete(id=${row.getId()})}">delete</a></td>
+                <td><a class="btn btn-primary" th:href="@{/customers/{id}/view(id=${row.getId()})}">view</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<footer th:replace="/layout :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</body>
+</html>
